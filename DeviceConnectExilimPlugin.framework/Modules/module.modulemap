@@ -1,0 +1,11 @@
+framework module DeviceConnectExilimPlugin {
+  umbrella header "DeviceConnectExilimPlugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module DeviceConnectExilimPlugin.Swift {
+    header "DeviceConnectExilimPlugin-Swift.h"
+    requires objc
+}

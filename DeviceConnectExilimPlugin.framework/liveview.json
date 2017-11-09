@@ -1,0 +1,218 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "EXILIMカメラのライブビューを使用するためのAPI。",
+        "version": "2.0.0",
+        "title": "Liveview Profile"
+    },
+    "consumes": [
+        "application/x-www-form-urlencoded",
+        "multipart/form-data"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "カメラからライブビュー画像を取得する。",
+                "description": "カメラがライブビューを作成している必要がある。",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GetLiveviewResponse"
+                        }
+                    }
+                },
+                "x-type": "one-shot"
+            },
+            "put": {
+                "summary": "ライブビューを開始する",
+                "description": " リモート撮影中はカメラから30fpsでライブビュー画像が送られてくる。ライブビュー設定によるが、ライブビューが更新されるたびにイベントが通知される。",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CommonResponse"
+                        }
+                    }
+                },
+                "x-type": "one-shot"
+            },
+            "delete": {
+                "summary": "ライブビューを停止する",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CommonResponse"
+                        }
+                    }
+                },
+                "x-type": "one-shot"
+            }
+        },
+        "/onLiveviewUpdate": {
+            "put": {
+                "summary": "ライブビュー更新を通知する",
+                "description": "イベントの通知はLiveviewImageResponseと同等。",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CommonResponse"
+                        }
+                    }
+                },
+                "x-type": "event"
+            },
+            "delete": {
+                "summary": "",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "target",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CommonResponse"
+                        }
+                    }
+                },
+                "x-type": "event"
+            }
+        }
+    },
+    "definitions": {
+        "GetLiveviewResponse": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                    "$ref": "#/definitions/LiveviewImageResponse"
+                }
+            ]
+        },
+        "LiveviewImageResponse": {
+            "type": "object",
+            "required": [
+                "filepath",
+                "mimeType",
+                "status"
+            ],
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": "状態識別文字列。",
+                    "title": "状態"
+                },
+                "filepath": {
+                    "type": "string",
+                    "title": "ファイルパス"
+                },
+                "mimeType": {
+                    "type": "string",
+                    "title": "MIME Type"
+                },
+                "errorMessasge": {
+                    "type": "string",
+                    "description": "エラー、警告内容を伝える文字列。状態が error、warning の時のみ付加される。省略可能。",
+                    "title": "エラーメッセージ"
+                }
+            }
+        },
+        "CommonResponse": {
+            "type": "object",
+            "required": [
+                "product",
+                "result",
+                "version"
+            ],
+            "properties": {
+                "result": {
+                    "type": "integer",
+                    "description": "0: 正常応答<br>0以外: 異常応答",
+                    "title": "処理結果"
+                },
+                "product": {
+                    "type": "string",
+                    "description": "",
+                    "title": "DeviceConnectシステムの名前"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "",
+                    "title": "DeviceConnectシステムのバージョン名"
+                }
+            }
+        }
+    }
+}
