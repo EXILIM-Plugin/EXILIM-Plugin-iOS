@@ -25,7 +25,8 @@ This pod is DeviceConnect device plugin for CASIO EXILIM digital cameras.
 
   s.dependency 'RxSwift', '~> 3.0'
   s.dependency 'RxCocoa', '~> 3.0'
+  s.dependency 'RxAutomaton', '= 0.2.1'
   s.dependency 'DeviceConnectSDK', '= 2.1.3'
-  s.dependency 'CocoaAsyncSocket', '~> 7.6.1'
-  s.dependency 'ReachabilitySwift'
+  s.dependency 'CocoaAsyncSocket', '= 7.6.1'
+  s.dependency 'ReachabilitySwift', '= 4.1.0'
 end

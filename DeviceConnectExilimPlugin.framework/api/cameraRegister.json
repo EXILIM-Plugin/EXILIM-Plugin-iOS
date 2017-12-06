@@ -1,0 +1,192 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "EXILIMカメラのWiFi接続設定を行なう",
+        "version": "2.0.0",
+        "title": "Camera Register Profile"
+    },
+    "consumes": [
+        "application/x-www-form-urlencoded",
+        "multipart/form-data"
+    ],
+    "paths": {
+        "/registerIp": {
+            "get": {
+                "summary": "EXILIMカメラのIPアドレスの登録情報を取得する",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "description": "サービスID。取得対象デバイス",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GetRegisterIpResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "product": "Example System",
+                                "version": "1.0.0",
+                                "register": [
+                                    {
+                                        "ip" : "192.168.100.2",
+                                        "cameraName" : "FR100-ABCDEF"
+                                    },
+                                    {
+                                        "ip" : "192.168.100.3",
+                                        "cameraName" : "RED_WIDERANGE_CAMERA"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-type": "one-shot"
+            },
+            "put": {
+                "summary": "EXILIMカメラのIPアドレスと対応する名前を登録する",
+                "description": "IPのみの登録の場合は接続しているカメラから情報を取得する。ここで登録された名前はMediaStreamRecordingプロファイルで使用される。",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "description": "サービスID。取得対象デバイス",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ip",
+                        "description": "カメラのIPアドレス",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "cameraName",
+                        "description": "カメラの名前。省略した場合はカメラから情報取得する。",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CommonResponse"
+                        }
+                    }
+                },
+                "x-type": "one-shot"
+            },
+            "delete": {
+                "summary": "EXILIMカメラのIPアドレスを登録解除する",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "description": "サービスID。取得対象デバイス",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ip",
+                        "description": "カメラのIPアドレス。省略した場合は全解除となる。",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CommonResponse"
+                        }
+                    }
+                },
+                "x-type": "one-shot"
+            }
+        }
+    },
+    "definitions": {
+        "GetRegisterIpResponse": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                    "type": "object",
+                    "required": [
+                        "register"
+                    ],
+                    "properties": {
+                        "register": {
+                            "type": "array",
+                            "title": "登録情報",
+                            "description": "登録情報一覧",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "ip",
+                                    "cameraName"
+                                ],
+                                "properties": {
+                                    "ip": {
+                                        "type": "string",
+                                        "title": "IPアドレス",
+                                        "description": "カメラのIPアドレス"
+                                    },
+                                    "cameraName": {
+                                        "type": "string",
+                                        "title": "ターゲット名",
+                                        "description": "登録されているカメラの名前"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "CommonResponse": {
+            "type": "object",
+            "required": [
+                "product",
+                "result",
+                "version"
+            ],
+            "properties": {
+                "result": {
+                    "type": "integer",
+                    "description": "0: 正常応答<br>0以外: 異常応答",
+                    "title": "処理結果"
+                },
+                "product": {
+                    "type": "string",
+                    "description": "",
+                    "title": "DeviceConnectシステムの名前"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "",
+                    "title": "DeviceConnectシステムのバージョン名"
+                },
+                "hmac": {
+                    "type": "string",
+                    "title": "署名",
+                    "description": "レスポンスに対する署名。アプリケーション側から事前にHMACキーを共有されていた場合は必須。"
+                }
+            }
+        }
+    }
+}
