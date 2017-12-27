@@ -2,6 +2,10 @@
 
 EXILIM-Plugin-iOSは、iOS版 Device Connectプラットフォームである [DeviceConnect-iOS](https://github.com/DeviceConnect/DeviceConnect-iOS/) でカシオ計算機製のデジタルカメラである EXILIM シリーズを利用できるようにするためのカシオ計算機公式のプラグインです。
 
+# API仕様
+本プラグインのAPI仕様は以下に公開しています。
+- [EXILIM-Plugin API](https://exilim-plugin.github.io/exilimApi/)
+
 # アーキテクチャ
 
 本プラグインはバイナリ形式のiOS フレームワークとして提供されています(ソースコードは非公開)。
