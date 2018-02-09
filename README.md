@@ -24,9 +24,9 @@ iOSで Device Connectおよびそのプラグインを利用するためには�
 
 ## 詳細仕様
 
-- 対応カメラ
-  - EXILIM FR-100
-  - EXILIM FR-200
+- 動作確認カメラ
+  - EXILIM EX-FR100
+  - EXILIM EX-FR200
 - 対応 OS
   - iOS 9.0 以上
 - 動作確認済み Xcode バージョン
