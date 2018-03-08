@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'DeviceConnectExilimPlugin'
-  s.version          = '0.1.0'
+  s.version          = '0.3.0'
   s.license          = { :type => 'MIT' }
   s.summary          = 'DeviceConnect device plugin for CASIO EXILIM.'
 
@@ -23,9 +23,9 @@ This pod is DeviceConnect device plugin for CASIO EXILIM digital cameras.
   s.vendored_frameworks = 'DeviceConnectExilimPlugin.framework'
   s.public_header_files = 'DeviceConnectExilimPlugin.framework/Headers/*.h'
 
-  s.dependency 'RxSwift', '~> 3.0'
-  s.dependency 'RxCocoa', '~> 3.0'
-  s.dependency 'RxAutomaton', '= 0.2.1'
+  s.dependency 'RxSwift', '~> 4.1.2'
+  s.dependency 'RxCocoa', '~> 4.0'
+  s.dependency 'RxAutomaton'
   s.dependency 'DeviceConnectSDK', '= 2.1.3'
   s.dependency 'CocoaAsyncSocket', '= 7.6.1'
   s.dependency 'ReachabilitySwift', '= 4.1.0'
