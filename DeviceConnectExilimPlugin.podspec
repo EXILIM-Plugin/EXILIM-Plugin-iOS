@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'DeviceConnectExilimPlugin'
-  s.version          = '0.3.0'
+  s.version          = '0.4.0'
   s.license          = { :type => 'MIT' }
   s.summary          = 'DeviceConnect device plugin for CASIO EXILIM.'
 
