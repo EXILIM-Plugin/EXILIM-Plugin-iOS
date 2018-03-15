@@ -54,7 +54,7 @@ EXILIM-Plugin-iOS-ControllerApp の Podfileは以下のような構造になっ�
 
 ```
 source 'https://github.com/EXILIM-Plugin/EXILIM-Plugin-iOS-PodSpecs.git'
-source 'https://github.com/kunichiko/DeviceConnect-PodSpecs.git'
+source 'https://github.com/DeviceConnect/DeviceConnect-PodSpecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '9.0'
@@ -95,13 +95,13 @@ end
 source 'https://github.com/EXILIM-Plugin/EXILIM-Plugin-iOS-PodSpecs.git'
 ```
 
-また、依存している DeviceConnectSDK は 2.2.10ですが、こちらのスペックが [DeviceConnect-iOS本家の PodSpecリポジトリ](https://github.com/DeviceConnect/DeviceConnect-PodSpecs.git)には登録されていないため、以下の source の追加が必要です。
+また、依存している DeviceConnectSDK は 2.2.10で、こちらのスペックは [DeviceConnect-iOS本家の PodSpecリポジトリ](source 'https://github.com/DeviceConnect/DeviceConnect-PodSpecs.git')に登録されています。
+
+こちらを利用するために、以下の source も追加してください。
 
 ```
-source 'https://github.com/kunichiko/DeviceConnect-PodSpecs.git'
+source 'https://github.com/DeviceConnect/DeviceConnect-PodSpecs.git'
 ```
-
-[プルリクエスト](https://github.com/DeviceConnect/DeviceConnect-PodSpecs/pull/2)がマージされ次第、こちらの URLは `https://github.com/DeviceConnect/DeviceConnect-PodSpecs.git` に変更になります。
 
 ### RxAutomatonを swift/4.0ブランチに変更
 
